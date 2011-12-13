@@ -1,0 +1,14 @@
+name: OldMcDonald
+main: com.minecarts.oldmcdonald.OldMcDonald
+version: ${pom.version}
+website: http://minecarts.com/
+author: verrier
+description: Grants better control over animal spawning
+commands:
+    stats:
+        description: Display some animal statistics to help debug spawning
+        usage: "/<command> [name, ...]"
+permissions:
+    oldmcdonald.stats:
+        description: "Display stats on the number of animals currently in the world"
+        default: op
