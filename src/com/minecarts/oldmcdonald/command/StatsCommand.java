@@ -31,7 +31,9 @@ public class StatsCommand extends CommandHandler {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(!sender.hasPermission("oldmcdonald.stats")) return true;
-        sender.sendMessage("-Animal Spawning Stats-");
+        plugin.spawner.displayReport();
+        return true;
+        /*sender.sendMessage("-Animal Spawning Stats-");
         World w = null;
         if(sender instanceof Player){
             w = ((Player)sender).getWorld();
@@ -98,5 +100,6 @@ public class StatsCommand extends CommandHandler {
         //
 
         return true;
+*/
     }
 }

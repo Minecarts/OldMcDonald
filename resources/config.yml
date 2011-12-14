@@ -1,0 +1,90 @@
+algorithm: basic #Which animal spawning algorithm / method to use (requires reload)
+spawn_interval: 5 #Interval at which spawning occurs (requires reload to adjust)
+spawn_delay: 30 #Seconds before animals will start spawning (requires reload)
+report_delay: 30 #Seconds at which a report will display (requires reload)
+report_enabled: true #Set to false to disable gathering of report statistics
+player:
+    minimum: 25 #Animals cannot spawn closer than this to a player (with some exceptions)
+    maximum: 125 #Animals cannot spawn farther than this from a player (with some exceptions)
+animals:
+    CHICKEN:
+        frequency: 0.80 #A frequency of 1 means that it will attempt to spawn everytime it's chosen, .1 = 10% of the time
+        nearby_range: 125 #Don't spawn if there are [nearby_count] TYPE within this many blocks
+        nearby_count: 10
+        maximum: 300 #Total number of TYPE that can be spawned in the world
+        cluster: #Can spawn in groups if min and max
+            min: 1
+            max: 4
+        blocks: ['GRASS'] #Allowed blocks to spawn on
+        biomes: ['EXTREME_HILLS','FOREST','PLAINS','RAINFOREST','RIVER','SAVANNA','SEASONAL_FOREST','SHRUBLAND','SWAMPLAND','TAIGA'] #Biomes that this animal can spawn in
+        light: 13 #Minimum light level creature can spawn at (0-15) -- http://www.minecraftwiki.net/wiki/Light
+    COW:
+        frequency: 1.0
+        nearby_range: 150
+        nearby_count: 10
+        maximum: 300
+        cluster:
+            min: 2
+            max: 4
+        blocks: ['GRASS']
+        biomes: ['EXTREME_HILLS','FOREST','PLAINS','RAINFOREST','RIVER','SAVANNA','SEASONAL_FOREST','SHRUBLAND','SWAMPLAND','TAIGA','TUNDRA','ICE_PLAINS']
+        light: 13
+    MUSHROOM_COW:
+        frequency: 0.75
+        nearby_range: 200
+        nearby_count: 15
+        maximum: 300
+        cluster:
+            min: 1
+            max: 3
+        blocks: ['MYCELIUM']
+        biomes: ['MUSHROOM_ISLAND','MUSHROOM_SHORE']
+        light: 13
+    PIG:
+        frequency: 1.0
+        nearby_range: 200
+        nearby_count: 15
+        maximum: 300
+        cluster:
+            min: 2
+            max: 4
+        blocks: ['GRASS', 'DIRT']
+        biomes: ['EXTREME_HILLS','FOREST','PLAINS','RAINFOREST','RIVER','SAVANNA','SEASONAL_FOREST','SHRUBLAND','SWAMPLAND','TAIGA','TUNDRA','ICE_PLAINS']
+        light: 13
+    SHEEP:
+        frequency: 1.0
+        nearby_range: 100
+        nearby_count: 20
+        maximum: 350
+        cluster:
+            min: 1
+            max: 4
+        blocks: ['GRASS']
+        biomes: ['EXTREME_HILLS','FOREST','PLAINS','RAINFOREST','RIVER','SAVANNA','SEASONAL_FOREST','SHRUBLAND','SWAMPLAND','TAIGA','TUNDRA','ICE_PLAINS']
+        light: 13
+    SQUID:
+        frequency: 0.70
+        nearby_range: 300
+        nearby_count: 20
+        maximum: 200
+        cluster:
+            min: 1
+            max: 3
+        blocks: ['WATER']
+        biomes: ['RAINFOREST','RIVER','OCEAN','SWAMPLAND']
+        light: 12
+    WOLF:
+        frequency: 0.20
+        nearby_range: 100
+        nearby_count: 20
+        maximum: 150
+        cluster:
+            min: 1
+            max: 5
+        blocks: ['GRASS, DIRT']
+        biomes: ['FOREST','RAINFOREST','TIAGA']
+        biome_reduction:
+            FOREST: 0.5 #spawns are 50% as likely
+            RAINFOREST: 0.25 #spawns are 25% likely
+        light: 13
+

@@ -7,8 +7,14 @@ description: Grants better control over animal spawning
 commands:
     stats:
         description: Display some animal statistics to help debug spawning
-        usage: "/<command> [name, ...]"
+        usage: "/<command> [world]"
+    animal:
+        description: Display some animal statistics to help debug spawning
+        usage: "/<command> [reload, report <start,stop>]"
 permissions:
+    oldmcdonald.reload:
+        description: "Reload the animal spawning config"
+        default: op
     oldmcdonald.stats:
         description: "Display stats on the number of animals currently in the world"
         default: op
