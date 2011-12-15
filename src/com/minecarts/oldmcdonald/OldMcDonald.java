@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 import com.minecarts.oldmcdonald.command.AnimalCommand;
 import com.minecarts.oldmcdonald.command.StatsCommand;
 import com.minecarts.oldmcdonald.thread.BasicSpawner;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.event.Event;
 import org.bukkit.entity.Player;
@@ -17,29 +18,22 @@ import net.minecraft.server.NetServerHandler;
 import org.bukkit.craftbukkit.entity.CraftPlayer;
 import org.bukkit.craftbukkit.CraftServer;
 
-/**
- * Created by IntelliJ IDEA.
- * User: stephen
- * Date: 12/12/11
- * Time: 10:34 PM
- * To change this template use File | Settings | File Templates.
- */
 public class OldMcDonald extends JavaPlugin {
     public final Logger log = Logger.getLogger("com.minecarts.oldmcdonald");
     public BasicSpawner spawner;
+    
+    private int spawnerTaskId = -1;
 
-    public void onEnable() {
-        PluginManager pm = getServer().getPluginManager();
-
-        getCommand("stats").setExecutor(new StatsCommand(this));
-        getCommand("animal").setExecutor(new AnimalCommand(this));
-
+    public void startSpawning(){
         int spawn_delay = getConfig().getInt("spawn_delay");
         int spawn_interval = getConfig().getInt("spawn_interval");
-
         if(getConfig().getString("algorithm").equals("basic")){
             spawner = new BasicSpawner(this);
-            getServer().getScheduler().scheduleSyncRepeatingTask(
+            if(Bukkit.getScheduler().isCurrentlyRunning(this.spawnerTaskId)){
+                log("Spawner task is already running, not starting.");
+                return;
+            }
+            spawnerTaskId = getServer().getScheduler().scheduleSyncRepeatingTask(
                     this,
                     spawner,
                     20 * spawn_delay,
@@ -47,12 +41,24 @@ public class OldMcDonald extends JavaPlugin {
         } else {
             log("No other spawning algorithms are yet supported.");
         }
+        this.log("Mob spawning will occur every " + spawn_interval + " seconds starting in " + spawn_delay + " seconds");
+    }
+
+    public void onEnable() {
+        PluginManager pm = getServer().getPluginManager();
+
+        getCommand("stats").setExecutor(new StatsCommand(this));
+        getCommand("animal").setExecutor(new AnimalCommand(this));
+
+
+        this.startSpawning();
 
         //Save the config
         getConfig().options().copyDefaults(true);
         this.saveConfig();
 
-        this.log("Enabled! Mob spawning will occur every " + spawn_interval + " seconds starting in " + spawn_delay + " seconds");
+        this.log("Enabled");
+
     }
 
     public void onDisable(){
@@ -65,4 +71,5 @@ public class OldMcDonald extends JavaPlugin {
     public void log(String message){
         this.log(message, Level.INFO);
     }
+
 }

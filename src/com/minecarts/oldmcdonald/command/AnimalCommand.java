@@ -47,6 +47,10 @@ public class AnimalCommand extends CommandHandler{
                 sender.sendMessage("Animal spawning report has been canceled");
                 return true;
             }
+            if(args[1].equals("restart")){
+                plugin.startSpawning();
+                return true;
+            }
         }
         return false;
     }
