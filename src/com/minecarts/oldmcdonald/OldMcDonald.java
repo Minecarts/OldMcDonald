@@ -5,11 +5,8 @@ import java.util.logging.Logger;
 
 import com.minecarts.oldmcdonald.command.AnimalCommand;
 import com.minecarts.oldmcdonald.command.StatsCommand;
-import com.minecarts.oldmcdonald.listener.EntityListener;
 import com.minecarts.oldmcdonald.thread.BasicSpawner;
 import org.bukkit.Bukkit;
-import org.bukkit.World;
-import org.bukkit.event.Event;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -17,8 +14,6 @@ public class OldMcDonald extends JavaPlugin {
     public final Logger log = Logger.getLogger("com.minecarts.oldmcdonald");
     public BasicSpawner spawner;
     private int spawnerTaskId = -1;
-
-    private EntityListener entityListener;
 
     public void startSpawning(){
         int spawn_delay = getConfig().getInt("spawn_delay");
@@ -45,8 +40,6 @@ public class OldMcDonald extends JavaPlugin {
 
         getCommand("stats").setExecutor(new StatsCommand(this));
         getCommand("animal").setExecutor(new AnimalCommand(this));
-
-        pm.registerEvent(Event.Type.CREATURE_SPAWN,new EntityListener(this), Event.Priority.Normal,this);
 
         this.startSpawning();
 
