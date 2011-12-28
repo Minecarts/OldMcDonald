@@ -124,13 +124,13 @@ public class BasicSpawner implements Runnable{
             //Check the lighting level of this block
             if(spawnBlock.getLightLevel() < plugin.getConfig().getInt("animals."+randomType+".light")){
                 if(reportEnabled) report.incrementFailure(FailureReason.LEVEL_LIGHT);
-                return;
+                continue;
             }
 
             //Check to see if it can spawn on this block type
             if(!plugin.getConfig().getStringList("animals."+randomType+".blocks").contains(checkBlock.getType().name())){
                 if(reportEnabled) report.incrementFailure(FailureReason.TYPE_BLOCK);
-                return;
+                continue;
             }
 
             //Check to see if there are any nearby entities here
