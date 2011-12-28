@@ -3,6 +3,7 @@ spawn_interval: 5 #Interval at which spawning occurs (requires reload to adjust)
 spawn_delay: 30 #Seconds before animals will start spawning (requires reload)
 report_delay: 30 #Seconds at which a report will display (requires reload)
 report_enabled: true #Set to false to disable gathering of report statistics
+native_spawning: false #If the default animal spawning code is enabled or not
 player:
     minimum: 25 #Animals cannot spawn closer than this to a player (with some exceptions)
     maximum: 125 #Animals cannot spawn farther than this from a player (with some exceptions)

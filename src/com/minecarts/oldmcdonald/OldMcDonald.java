@@ -7,21 +7,13 @@ import com.minecarts.oldmcdonald.command.AnimalCommand;
 import com.minecarts.oldmcdonald.command.StatsCommand;
 import com.minecarts.oldmcdonald.thread.BasicSpawner;
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.event.Event;
-import org.bukkit.entity.Player;
-import org.bukkit.plugin.PluginDescriptionFile;
+import org.bukkit.World;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.util.config.Configuration;
-import net.minecraft.server.NetServerHandler;
-import org.bukkit.craftbukkit.entity.CraftPlayer;
-import org.bukkit.craftbukkit.CraftServer;
 
 public class OldMcDonald extends JavaPlugin {
     public final Logger log = Logger.getLogger("com.minecarts.oldmcdonald");
     public BasicSpawner spawner;
-    
     private int spawnerTaskId = -1;
 
     public void startSpawning(){
@@ -50,6 +42,11 @@ public class OldMcDonald extends JavaPlugin {
         getCommand("stats").setExecutor(new StatsCommand(this));
         getCommand("animal").setExecutor(new AnimalCommand(this));
 
+        //Handle our native spawn configuration
+        for(World world : Bukkit.getWorlds()){
+            world.setSpawnFlags(world.getAllowMonsters(),getConfig().getBoolean("native_spawning"));
+            log("Disabled native spawning for world: " + world.getName());
+        }
 
         this.startSpawning();
 
@@ -58,7 +55,6 @@ public class OldMcDonald extends JavaPlugin {
         this.saveConfig();
 
         this.log("Enabled");
-
     }
 
     public void onDisable(){
