@@ -1,6 +1,7 @@
 package com.minecarts.oldmcdonald.listener;
 
 import com.minecarts.oldmcdonald.OldMcDonald;
+import org.bukkit.entity.Animals;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 
 public class EntityListener extends org.bukkit.event.entity.EntityListener {
@@ -16,7 +17,8 @@ public class EntityListener extends org.bukkit.event.entity.EntityListener {
     public void onCreatureSpawn(CreatureSpawnEvent e){
         if(e.isCancelled()) return;
         if(e.getSpawnReason() != CreatureSpawnEvent.SpawnReason.NATURAL) return;
-
+        if(!(e.getEntity() instanceof Animals)) return;
+        
         if(!plugin.getConfig().getBoolean("native_spawning")){
             e.setCancelled(true);
         }
