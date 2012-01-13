@@ -110,7 +110,7 @@ public class BasicSpawner implements Runnable{
             Block checkBlock = spawnBlock.getRelative(BlockFace.DOWN);
 
             //Check to see if this block is in a valid biome for this creature type
-            if(!plugin.getConfig().getStringList("animals."+randomType+".biomes").contains(checkBlock.getBiome().name())){
+            if(checkBlock.getBiome() != null && !plugin.getConfig().getStringList("animals."+randomType+".biomes").contains(checkBlock.getBiome().name())){
                 if(reportEnabled) report.incrementFailure(FailureReason.TYPE_BIOME);
                 continue;
             }
