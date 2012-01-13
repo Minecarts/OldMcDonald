@@ -116,7 +116,7 @@ public class BasicSpawner implements Runnable{
             }
 
             //See if we need to reduce the spawn chance in this biome
-            if((1 - plugin.getConfig().getDouble("animals."+randomType+".biome_reduction."+spawnBlock.getBiome().name(),1)) > rand.nextDouble()){
+            if(checkBlock.getBiome() != null && (1 - plugin.getConfig().getDouble("animals."+randomType+".biome_reduction."+spawnBlock.getBiome().name(),1)) > rand.nextDouble()){
                 if(reportEnabled) report.incrementFailure(FailureReason.CHANCE_BIOME);
                 continue;
             }
