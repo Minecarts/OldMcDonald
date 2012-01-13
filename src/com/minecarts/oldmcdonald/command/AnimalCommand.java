@@ -25,6 +25,10 @@ public class AnimalCommand extends CommandHandler{
             sender.sendMessage("Animal spawning config reloaded");
             return true;
         }
+        if(args[0].equals("restart")){
+            plugin.startSpawning();
+            return true;
+        }
         if(args[0].equals("report")){
             if(!sender.hasPermission("oldmcdonald.stats")) return false;
             if(args.length < 2) return false;
@@ -45,10 +49,6 @@ public class AnimalCommand extends CommandHandler{
             if(args[1].equals("stop")){
                 Bukkit.getScheduler().cancelTask(reportTaskId);
                 sender.sendMessage("Animal spawning report has been canceled");
-                return true;
-            }
-            if(args[1].equals("restart")){
-                plugin.startSpawning();
                 return true;
             }
         }
